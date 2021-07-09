@@ -27,9 +27,7 @@ router.route('/')
   .post(async (req, res) => {
    try{
      let {userid,quizdata}=req.body;
-     console.log(userid,quizdata);
      const data=await datamodel.findOne({user:userid});
-     console.log({data});
      if(data)
      {
        const duplicatedata=data.dataset.find(item=>(date(item.Date)===date()&& item.category===quizdata.category));
@@ -92,8 +90,9 @@ router.route('/monthlyperformance')
      let {userid}=req.body;
      const data=await datamodel.findOne({user:userid});
      const statdata=data.dataset.filter(item=>month(item.Date)===month()&&year(item.Date)===year());
-      const reducedtotalscore=statdata.reduce((total,item)=>{console.log("total",item.totalscore)
-      return total+item.totalscore},0)
+      const reducedtotalscore=statdata.reduce((total,item)=>{
+      return total+item.totalscore
+      },0)
       const reducedobtainscore=statdata.reduce((total,item)=>total+item.score,0)
       const percentage=(reducedobtainscore / reducedtotalscore)*100
       res.json(percentage)
@@ -108,8 +107,9 @@ router.route('/monthlyperformance')
      let {userid}=req.body;
      const data=await datamodel.findOne({user:userid});
      const statdata=data.dataset.filter(item=>year(item.Date)===year());
-     const reducedtotalscore=statdata.reduce((total,item)=>{console.log("total",item.totalscore)
-     return total+item.totalscore},0)
+     const reducedtotalscore=statdata.reduce((total,item)=>{
+     return total+item.totalscore
+     },0)
      const reducedobtainscore=statdata.reduce((total,item)=>total+item.score,0)
      const percentage=(reducedobtainscore / reducedtotalscore) * 100
      res.json(percentage)
@@ -124,8 +124,9 @@ router.route('/monthlyperformance')
      let {userid}=req.body;
      const data=await datamodel.findOne({user:userid});
      const statdata=data.dataset.filter(item=>date(item.Date)===date());
-      const reducedtotalscore=statdata.reduce((total,item)=>{console.log("total",item.totalscore)
-      return total+item.totalscore},0)
+      const reducedtotalscore=statdata.reduce((total,item)=>{
+      return total+item.totalscore
+      },0)
       const reducedobtainscore=statdata.reduce((total,item)=>total+item.score,0)
       const percentage=(reducedobtainscore/reducedtotalscore)*100
       res.json(percentage)

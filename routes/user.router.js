@@ -28,7 +28,6 @@ router.route('/save')
      else{
       let createduser=await usermodel.create({
      name,email,password});
-     console.log("user",{_id:createduser._id,name:createduser.name,email:createduser.email})
      res.status(200).json({_id:createduser._id,name:createduser.name,email:createduser.email})
      }
    }
